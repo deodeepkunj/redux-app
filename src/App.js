@@ -1,12 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import HomeComponent from './containers/HomeContainer'
 
-function App() {
+const App = ()  => {
   return (
-    <div className="App">
-      <h1>Hi...</h1>
-      <h2>Ha..</h2>
-    </div>
+    <>
+    <HomeComponent />
+    </>
   );
 }
 
