@@ -11,17 +11,9 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-
+import { NavLink } from 'react-router-dom';
 import '../index.css';
 
-const cards = [1];
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -96,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header(props) {
-  console.warn("Home", props.data);
+  console.warn("Header", props.data);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -149,7 +141,7 @@ export default function Header(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show {props.data.length} new items in cart" color="inherit">
+        <IconButton component={NavLink} to="/cart" aria-label="show {props.data.length} new items in cart" color="inherit">
           <Badge badgeContent={props.data.length} color="secondary">
             <ShoppingCartIcon />
           </Badge>
@@ -179,11 +171,12 @@ export default function Header(props) {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show {props.data.length} new items in cart" color="inherit">
+            <IconButton component={NavLink} to="/cart"  aria-label="show {props.data.length} new items in cart" color="inherit">
               <Badge badgeContent={props.data.length} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
+            
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -210,36 +203,7 @@ export default function Header(props) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Container className={classes.cardGrid} maxWidth="md">
-            <Grid container spacing={4}>
-              {cards.map((card) => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Heading
-                      </Typography>
-                      <Typography>
-                        This is a media card. You can use this section to describe the content.
-                      </Typography>
-                    </CardContent>
-                    <CardActions className={classes.CardActions}>
-                      <Button size="small" color="primary" className={classes.customButton} onClick={()=>
-                        props.addToCartHandler({price: 1000, name: 'react cources'})
-                      }>
-                        Add To Cart
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
+      
     </div>
   );
 }
